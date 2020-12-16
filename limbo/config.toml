@@ -8,3 +8,18 @@ dark = "auto"
 description = "Just another blog from a depressed computer guy."
 highlight = true
 rss = true
+
+[menu]
+[[menu.main]]
+identifier = "posts"
+name = "posts"
+title = "posts"
+url = "/"
+weight = 10
+
+[[menu.main]]
+identifier = "about"
+name = "about"
+title = "about"
+url = "/about/"
+weight = 20
