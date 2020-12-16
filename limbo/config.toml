@@ -1,0 +1,10 @@
+baseURL = "https://exception.blog"
+languageCode = "en-us"
+theme = "etch"
+title = "Jojo's Exception Blog"
+
+[params]
+dark = "auto"
+description = "Just another blog from a depressed computer guy."
+highlight = true
+rss = true

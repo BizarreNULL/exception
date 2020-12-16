@@ -1,0 +1,29 @@
+name: Build and Deploy
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Update Theme 🔧 
+        run: git submodule update --init --recursive
+
+      - name: Setup Hugo 🔧
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.79.0"
+      
+      - name: Build blog 🔧
+        run: (cd limbo; hugo -D --minify)
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: limbo/public
+          CLEAN: true 

@@ -1,0 +1,3 @@
+[submodule "limbo/themes/etch"]
+	path = limbo/themes/etch
+	url = https://github.com/LukasJoswiak/etch.git
