@@ -8,5 +8,4 @@ Olá, sou o Jojo, escrevo neste blog coisas que gosto, focados em segurança da 
 
 Para entrar em contato comigo, é só pegar minha chave no Keybase, e enviar uma mensagem para *jonas `dot` uliana `at` passwd `dot`com `dot` br*.
 
-> The content of this blog is focused in Brazilian portuguese, but some posts are available in English as well.
-
+> The content is aimed at Brazilian Portuguese, but some posts are available in English as well.
