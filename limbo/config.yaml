@@ -1,0 +1,83 @@
+baseURL: "https://exception.blog"
+title: Jojo's Exception
+paginate: 8
+theme: hugo-PaperMod
+enableInlineShortcodes: true
+enableRobotsTXT: true
+
+minify:
+    disableXML: true
+    minifyOutput: true
+
+languages:
+    en:
+        languageName: "Portuguese"
+        weight: 1
+        menu:
+            main:
+                # - name: Tags
+                #   url: tags/
+                #   weight: 10
+                - name: About
+                  url: about/
+                  weight: 5
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
+
+params:
+    env: production
+    description: "Just another IT blog"
+    author: Jojo
+    ShowReadingTime: true
+    defaultTheme: auto
+    ShowShareButtons: false
+    displayFullLangName: false
+    # images: ""
+    # assets:
+    #   favicon: '<path / external url>'
+
+    homeInfoParams:
+        Title: "`Console.WriteLine(\"Hi!\");`"
+        Content: >
+            Welcome to my personal ~~hell~~ blog.
+            I wrote about .NET and application security.
+    socialIcons:
+        - name: twitter
+          url: "https://twitter.com/BizarreNull"
+        - name: linkedin
+          url: "https://www.linkedin.com/in/bizarrenull/"
+        - name: github
+          url: "https://github.com/BizarreNULL"
+
+taxonomies:
+    category: categories
+    tag: tags
+    series: series
+
+privacy:
+    vimeo:
+        disabled: false
+        simple: true
+
+    twitter:
+        disabled: false
+        enableDNT: true
+        simple: true
+
+    instagram:
+        disabled: false
+        simple: true
+
+    youtube:
+        disabled: false
+        privacyEnhanced: true
+
+services:
+    instagram:
+        disableInlineCSS: true
+    twitter:
+        disableInlineCSS: true

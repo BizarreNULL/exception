@@ -1,3 +1,9 @@
 [submodule "limbo/themes/etch"]
 	path = limbo/themes/etch
 	url = https://github.com/LukasJoswiak/etch.git
+[submodule "themes/hugo-PaperMod"]
+	path = themes/hugo-PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod.git
+[submodule "limbo/themes/hugo-PaperMod"]
+	path = limbo/themes/hugo-PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod.git
