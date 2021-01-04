@@ -1,1 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://exception.blog/</loc><lastmod>2020-12-30T18:21:14-03:00</lastmod></url><url><loc>https://exception.blog/posts/</loc><lastmod>2020-12-30T18:21:14-03:00</lastmod></url><url><loc>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</loc><lastmod>2020-12-30T18:21:14-03:00</lastmod></url><url><loc>https://exception.blog/about/</loc><lastmod>2020-12-16T17:52:10-03:00</lastmod></url><url><loc>https://exception.blog/categories/</loc></url><url><loc>https://exception.blog/tags/</loc></url></urlset>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://exception.blog/</loc>
+    <lastmod>2020-12-30T18:21:14-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://exception.blog/posts/</loc>
+    <lastmod>2020-12-30T18:21:14-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</loc>
+    <lastmod>2020-12-30T18:21:14-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://exception.blog/about/</loc>
+    <lastmod>2020-12-16T17:52:10-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://exception.blog/tags/informative/</loc>
+    <lastmod>2020-12-16T17:52:10-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://exception.blog/tags/</loc>
+    <lastmod>2020-12-16T17:52:10-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://exception.blog/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://exception.blog/series/</loc>
+  </url>
+  
+</urlset>
