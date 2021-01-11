@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>research on Jojo&#39;s Exception</title>
+    <link>https://exception.blog/tags/research/</link>
+    <description>Recent content in research on Jojo&#39;s Exception</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 10 Jan 2021 16:47:21 -0300</lastBuildDate><atom:link href="https://exception.blog/tags/research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hackeando apps financeiros para OSINT (e pela zueira): Tudo pelo PIX!</title>
+      <link>https://exception.blog/posts/hackeando-apps-financeiros-para-osint/</link>
+      <pubDate>Sun, 10 Jan 2021 16:47:21 -0300</pubDate>
+      
+      <guid>https://exception.blog/posts/hackeando-apps-financeiros-para-osint/</guid>
+      <description>O PIX foi uma das maiores mudanças que tivemos promovidas pelo BACEN (e por outras instituições financeiras ligadas aos fóruns), que vai promover muita agilidade, simplicidade, e o mais importante segurança. Um dos pontos mais perigosos de vender um produto, ou uma feature dele como sendo algo seguro, é que muitas vezes isso pode ser utilizado contra você.
+Para não focarmos no PIX, e ir direto ao assunto, deixo como recomendação uma postagem feita pelo mestre Anchises lá no blog do posto Ipiranga, você pode encontra-lá aqui, recomendo que faça a leitura do conteúdo, antes de avançar por aqui.</description>
+    </item>
+    
+  </channel>
+</rss>
