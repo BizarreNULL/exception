@@ -2,6 +2,7 @@
 title: "Hackeando apps financeiros para OSINT (e pela zueira): Tudo pelo PIX!"
 date: 2021-01-10T16:47:21-03:00
 draft: false
+tags: ["android-re", "research"]
 ---
 
 O PIX foi uma das maiores mudanças que tivemos promovidas pelo BACEN (e por outras instituições financeiras ligadas aos fóruns), que vai promover muita agilidade, simplicidade, e o mais importante segurança. Um dos pontos mais perigosos de vender um produto, ou uma *feature* dele como sendo algo seguro, é que muitas vezes isso pode ser utilizado contra você.

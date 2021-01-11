@@ -2,6 +2,7 @@
 title: "Solucionando problemas de sincronismo de requisições em paralelo com SemaphoreSlim"
 date: 2020-12-30T18:21:14-03:00
 draft: false
+tags: ["dotnet", "parallel", "async"]
 ---
 
 # Dando um `push()` no problema
