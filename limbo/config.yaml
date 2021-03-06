@@ -41,17 +41,15 @@ params:
     #   favicon: '<path / external url>'
 
     homeInfoParams:
-        Title: "`Console.WriteLine(\"Hi!\");`"
-        Content: >
-            Welcome to my personal ~~hell~~ blog.
-            I wrote about .NET and application security.
+        Title: "`if (hope.Any()) return;`"
+        Content: About 6a6f6a6f's life and job exceptions.
     socialIcons:
         - name: twitter
-          url: "https://twitter.com/BizarreNull"
+          url: "https://twitter.com/6a6f6a6f"
         - name: linkedin
-          url: "https://www.linkedin.com/in/bizarrenull/"
+          url: "https://www.linkedin.com/in/6a6f6a6f/"
         - name: github
-          url: "https://github.com/BizarreNULL"
+          url: "https://github.com/6a6f6a6f"
 
 taxonomies:
     category: categories
