@@ -1,51 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Jojo&#39;s Exception</title>
-    <link>https://exception.blog/</link>
-    <description>Recent content on Jojo&#39;s Exception</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 05 Mar 2021 23:32:22 -0300</lastBuildDate><atom:link href="https://exception.blog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Contornando a ofuscação de código no Android</title>
-      <link>https://exception.blog/posts/contornando-ofusca%C3%A7%C3%A3o-de-c%C3%B3digo/</link>
-      <pubDate>Fri, 05 Mar 2021 23:32:22 -0300</pubDate>
-      
-      <guid>https://exception.blog/posts/contornando-ofusca%C3%A7%C3%A3o-de-c%C3%B3digo/</guid>
-      <description>Das diversas coisas que já fiz em segurança de aplicações móveis, e dessas, principalmente testes totalmente blackbox (aqueles onde você tem o aplicativo, .apk, e deve procurar por vulnerabilidades nesse escopo incerto), acabou por ficar sendo uma das atividades que mais gosto de exercer no bug hunting e também como lazer.
- Alerta: O texto é recheado de alguns RANTs, mas acredito que são necessários.
- Antes de aprofundar sobre o tema, gostaria de deixar um disclaimer: Se você trabalha, ou se intitula, como pentester ou correlatos, focados em segurança em aplicações móveis, no mínimo você deve saber programar muito bem na stack que está auditando, ou rabiscar Hello, World!</description>
-    </item>
-    
-    <item>
-      <title>Hackeando apps financeiros para OSINT (e pela zueira): Tudo pelo PIX!</title>
-      <link>https://exception.blog/posts/hackeando-apps-financeiros-para-osint/</link>
-      <pubDate>Sun, 10 Jan 2021 16:47:21 -0300</pubDate>
-      
-      <guid>https://exception.blog/posts/hackeando-apps-financeiros-para-osint/</guid>
-      <description>O PIX foi uma das maiores mudanças que tivemos promovidas pelo BACEN (e por outras instituições financeiras ligadas aos fóruns), que vai promover muita agilidade, simplicidade, e o mais importante segurança. Um dos pontos mais perigosos de vender um produto, ou uma feature dele como sendo algo seguro, é que muitas vezes isso pode ser utilizado contra você.
-Para não focarmos no PIX, e ir direto ao assunto, deixo como recomendação uma postagem feita pelo mestre Anchises lá no blog do posto Ipiranga, você pode encontra-lá aqui, recomendo que faça a leitura do conteúdo, antes de avançar por aqui.</description>
-    </item>
-    
-    <item>
-      <title>Solucionando problemas de sincronismo de requisições em paralelo com SemaphoreSlim</title>
-      <link>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</link>
-      <pubDate>Wed, 30 Dec 2020 18:21:14 -0300</pubDate>
-      
-      <guid>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</guid>
-      <description>Dando um push() no problema Um dos desafios que nem com as técnicas mais sombrias de debugging me ajudaram a entender o que meu contexto de requisições HTTP assíncronos e paralelos estavam retornando uma exceção baseada no cancelamento das referências das instâncias dos vários CancellationToken utilizados para construir o cliente das requisições.
-Foi uma discussão bem legal com alguns monstros da CLR e até mesmo do Roslyn, que com uma paciência de Jó, conseguiram ir a fundo na explicação sobre o funcionamento da pilha de rede dentro do .</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://exception.blog/about/</link>
-      <pubDate>Wed, 16 Dec 2020 17:52:10 -0300</pubDate>
-      
-      <guid>https://exception.blog/about/</guid>
-      <description>Olá, como deve ter percebido, sou o Jojo, escrevo neste blog coisas que gosto, focados em segurança da informação, linguagens de programação exotéricas e um pouco de compiladores/interpretadores de linguagens ainda mais estranhas. Todo o conteúdo (e o próprio blog) está disponível nesse repositório esperando seu forks e também pull-requests caso quiser publicar algo, bem como corrigir uma cagada ou outra que escrevo aqui.
-Para entrar em contato comigo, é só pegar minha chave no Keybase, e enviar uma mensagem para jonas dot uliana at passwd dotcom dot br (ou preferencialmente por lá mesmo).</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Terminal</title><link>https://exception.blog/</link><description>Recent content on Terminal</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 05 Mar 2021 23:32:22 -0300</lastBuildDate><atom:link href="https://exception.blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Contornando a ofuscação de código no Android</title><link>https://exception.blog/posts/contornando-ofusca%C3%A7%C3%A3o-de-c%C3%B3digo/</link><pubDate>Fri, 05 Mar 2021 23:32:22 -0300</pubDate><guid>https://exception.blog/posts/contornando-ofusca%C3%A7%C3%A3o-de-c%C3%B3digo/</guid><description>Das diversas coisas que já fiz em segurança de aplicações móveis, e dessas, principalmente testes totalmente blackbox (aqueles onde você tem o aplicativo, .apk, e deve procurar por vulnerabilidades nesse escopo incerto), acabou por ficar sendo uma das atividades que mais gosto de exercer no bug hunting e também como lazer.
+Alerta: O texto é recheado de alguns RANTs, mas acredito que são necessários.
+Antes de aprofundar sobre o tema, gostaria de deixar um disclaimer: Se você trabalha, ou se intitula, como pentester ou correlatos, focados em segurança em aplicações móveis, no mínimo você deve saber programar muito bem na stack que está auditando, ou rabiscar Hello, World!</description></item><item><title>Hackeando apps financeiros para OSINT (e pela zueira): Tudo pelo PIX!</title><link>https://exception.blog/posts/hackeando-apps-financeiros-para-osint/</link><pubDate>Sun, 10 Jan 2021 16:47:21 -0300</pubDate><guid>https://exception.blog/posts/hackeando-apps-financeiros-para-osint/</guid><description>O PIX foi uma das maiores mudanças que tivemos promovidas pelo BACEN (e por outras instituições financeiras ligadas aos fóruns), que vai promover muita agilidade, simplicidade, e o mais importante segurança. Um dos pontos mais perigosos de vender um produto, ou uma feature dele como sendo algo seguro, é que muitas vezes isso pode ser utilizado contra você.
+Para não focarmos no PIX, e ir direto ao assunto, deixo como recomendação uma postagem feita pelo mestre Anchises lá no blog do posto Ipiranga, você pode encontra-lá aqui, recomendo que faça a leitura do conteúdo, antes de avançar por aqui.</description></item><item><title>Solucionando problemas de sincronismo de requisições em paralelo com SemaphoreSlim</title><link>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</link><pubDate>Wed, 30 Dec 2020 18:21:14 -0300</pubDate><guid>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</guid><description>Dando um push() no problema Um dos desafios que nem com as técnicas mais sombrias de debugging me ajudaram a entender o que meu contexto de requisições HTTP assíncronos e paralelos estavam retornando uma exceção baseada no cancelamento das referências das instâncias dos vários CancellationToken utilizados para construir o cliente das requisições.
+Foi uma discussão bem legal com alguns monstros da CLR e até mesmo do Roslyn, que com uma paciência de Jó, conseguiram ir a fundo na explicação sobre o funcionamento da pilha de rede dentro do .</description></item><item><title>About</title><link>https://exception.blog/about/</link><pubDate>Wed, 16 Dec 2020 17:52:10 -0300</pubDate><guid>https://exception.blog/about/</guid><description>Olá, como deve ter percebido, sou o Jojo, escrevo neste blog coisas que gosto, focados em segurança da informação, linguagens de programação exotéricas e um pouco de compiladores/interpretadores de linguagens ainda mais estranhas. Todo o conteúdo (e o próprio blog) está disponível nesse repositório esperando seu forks e também pull-requests caso quiser publicar algo, bem como corrigir uma cagada ou outra que escrevo aqui.
+Para entrar em contato comigo, é só pegar minha chave no Keybase, e enviar uma mensagem para jonas dot uliana at passwd dotcom dot br (ou preferencialmente por lá mesmo).</description></item></channel></rss>

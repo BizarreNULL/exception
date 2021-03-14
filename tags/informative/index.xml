@@ -1,20 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>informative on Jojo&#39;s Exception</title>
-    <link>https://exception.blog/tags/informative/</link>
-    <description>Recent content in informative on Jojo&#39;s Exception</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 16 Dec 2020 17:52:10 -0300</lastBuildDate><atom:link href="https://exception.blog/tags/informative/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About</title>
-      <link>https://exception.blog/about/</link>
-      <pubDate>Wed, 16 Dec 2020 17:52:10 -0300</pubDate>
-      
-      <guid>https://exception.blog/about/</guid>
-      <description>Olá, como deve ter percebido, sou o Jojo, escrevo neste blog coisas que gosto, focados em segurança da informação, linguagens de programação exotéricas e um pouco de compiladores/interpretadores de linguagens ainda mais estranhas. Todo o conteúdo (e o próprio blog) está disponível nesse repositório esperando seu forks e também pull-requests caso quiser publicar algo, bem como corrigir uma cagada ou outra que escrevo aqui.
-Para entrar em contato comigo, é só pegar minha chave no Keybase, e enviar uma mensagem para jonas dot uliana at passwd dotcom dot br (ou preferencialmente por lá mesmo).</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>informative on Terminal</title><link>https://exception.blog/tags/informative/</link><description>Recent content in informative on Terminal</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 16 Dec 2020 17:52:10 -0300</lastBuildDate><atom:link href="https://exception.blog/tags/informative/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://exception.blog/about/</link><pubDate>Wed, 16 Dec 2020 17:52:10 -0300</pubDate><guid>https://exception.blog/about/</guid><description>Olá, como deve ter percebido, sou o Jojo, escrevo neste blog coisas que gosto, focados em segurança da informação, linguagens de programação exotéricas e um pouco de compiladores/interpretadores de linguagens ainda mais estranhas. Todo o conteúdo (e o próprio blog) está disponível nesse repositório esperando seu forks e também pull-requests caso quiser publicar algo, bem como corrigir uma cagada ou outra que escrevo aqui.
+Para entrar em contato comigo, é só pegar minha chave no Keybase, e enviar uma mensagem para jonas dot uliana at passwd dotcom dot br (ou preferencialmente por lá mesmo).</description></item></channel></rss>
