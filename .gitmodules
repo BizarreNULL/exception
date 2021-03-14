@@ -1,0 +1,3 @@
+[submodule "limbo/themes/terminal"]
+	path = limbo/themes/terminal
+	url = https://github.com/panr/hugo-theme-terminal.git
