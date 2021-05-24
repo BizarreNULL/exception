@@ -5,15 +5,16 @@ paginate = 5
 
 [params]
   contentTypeName = "posts"
-  themeColor = "green"
+  themeColor = "red"
   showMenuItems = 2
   fullWidthTheme = false
   centerTheme = true
+  favicon = "favicon.png"
 
 [languages]
   [languages.en]
     title = "Jojo's Exceptions"
-    subtitle = "Another blog about infosec and development"
+    subtitle = "My thoughts about really general stuff"
     keywords = ""
     copyright = ""
     menuMore = "Show more"
