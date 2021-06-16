@@ -18,7 +18,7 @@ jobs:
           hugo-version: "0.83.1"
       
       - name: Build blog 🔧
-        run: (cd limbo; hugo -D --minify)
+        run: hugo -D --minify
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
