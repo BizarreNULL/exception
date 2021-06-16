@@ -1,2 +1,91 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>dotnet on Jojo's Exceptions</title><link>https://exception.blog/tags/dotnet/</link><description>Recent content in dotnet on Jojo's Exceptions</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 30 Dec 2020 18:21:14 -0300</lastBuildDate><atom:link href="https://exception.blog/tags/dotnet/index.xml" rel="self" type="application/rss+xml"/><item><title>Solucionando problemas de sincronismo de requisições em paralelo com SemaphoreSlim</title><link>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</link><pubDate>Wed, 30 Dec 2020 18:21:14 -0300</pubDate><guid>https://exception.blog/posts/problemas-com-httpclient-resolvidos/</guid><description>Dando um push() no problema Um dos desafios que nem com as técnicas mais sombrias de debugging me ajudaram a entender o que meu contexto de requisições HTTP assíncronos e paralelos estavam retornando uma exceção baseada no cancelamento das referências das instâncias dos vários CancellationToken utilizados para construir o cliente das requisições.
-Foi uma discussão bem legal com alguns monstros da CLR e até mesmo do Roslyn, que com uma paciência de Jó, conseguiram ir a fundo na explicação sobre o funcionamento da pilha de rede dentro do .</description></item></channel></rss>
+Foi uma discussão bem legal com alguns monstros da CLR e até mesmo do Roslyn, que com uma paciência de Jó, conseguiram ir a fundo na explicação sobre o funcionamento da pilha de rede dentro do .</description><content>&lt;h1 id="dando-um-push-no-problema">Dando um &lt;code>push()&lt;/code> no problema&lt;/h1>
+&lt;p>Um dos desafios que nem com as técnicas mais sombrias de &lt;em>debugging&lt;/em> me ajudaram a entender o que meu contexto de requisições HTTP assíncronos e paralelos estavam retornando uma exceção baseada no cancelamento das referências das instâncias dos vários &lt;code>CancellationToken&lt;/code> utilizados para construir o cliente das requisições.&lt;/p>
+&lt;p>Foi uma discussão bem legal com alguns monstros da CLR e até mesmo do Roslyn, que com uma paciência de Jó, conseguiram ir a fundo na explicação sobre o funcionamento da pilha de rede dentro do .NET, e também, sobre a abstração que estava consumindo. No geral, as diversas &lt;em>tasks&lt;/em> que havia emitido, que foram passadas para serem aguardadas sua execução até o fim como parâmetro da função &lt;code>WhenAll&lt;/code> lá do binário &lt;code>System.Runtime.dll&lt;/code>.&lt;/p>
+&lt;blockquote>
+&lt;p>Para não descer muito o nível, e deixar tudo de maneira bem entendível, não vou abranger muito a explicação que absorvi, e focar na resolução desse problema relativamente simples.&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="nem-sempre-é-tudo-uma-questão-de-alto-nível">Nem sempre é tudo uma questão de alto nível&lt;/h1>
+&lt;p>Em contextos de paralelismo com tarefas que consomem muito tempo do processador, ainda que existem outras várias camadas para orquestrarem essas tarefas, desde de o próprio CPU até o sistema operacional e a própria &lt;em>stack&lt;/em> de desenvolvimento, cabe a nós implementarmos controles eficazes na orquestração nas nossas próprias tarefas.&lt;/p>
+&lt;p>Especialmente nas linguagens de altíssimo nível, que entregam uma abstração &lt;em>muito abstrata - eu ri por dentro aqui -&lt;/em> do que realmente é uma &lt;em>thread&lt;/em>, devemos ter essa atenção dobrada para não cair em um contexto de cancelamento pois o tempo de resposta da aplicação para o ambiente onde foi delegada sua execução chegar ao limite.&lt;/p>
+&lt;p>Nesse cenário do &lt;code>HttpClientHandler&lt;/code> e do &lt;code>HttpClient&lt;/code> isso fica mais fácil de se perceber, mesmo que você implemente um &lt;em>timeout&lt;/em> na casa dos &lt;code>TimeSpam.FromDays(666)&lt;/code>, se o tempo de execução de qualquer uma das funções assíncronas do &lt;code>HttpClient&lt;/code>, como a mais utilizada &lt;code>HttpClient.SendAsync(HttpRequestMessage)&lt;/code>, podem retornar um &lt;em>timeout&lt;/em>, mas não da resposta HTTP do servidor, e sim da sua &lt;code>Task&lt;/code> que está no limbo do atual contexto de processamento.&lt;/p>
+&lt;blockquote>
+&lt;p>Vai por mim, evite utilizar funções que podem receber uma sobrecarga de uma instância de &lt;code>CancellationToken&lt;/code>, se ela pode trabalhar com os &lt;em>status&lt;/em> provenientes dessa estrutura, algum motivo tem.&lt;/p>
+&lt;/blockquote>
+&lt;p>Para simplificar o entendimento de todo esse cenário intangível, vamos trazer ao código uma péssima prática de programação (que quase me fez desistir do desenvolvimento do &lt;a href="https://github.com/BizarreNULL/httpdoom/">HttpDoom&lt;/a>) relacionada ao paralelismo e assincronicidade de código:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="color:#66d9ef">using&lt;/span> System;
+&lt;span style="color:#66d9ef">using&lt;/span> System.Linq;
+&lt;span style="color:#66d9ef">using&lt;/span> System.Net.Http;
+&lt;span style="color:#66d9ef">using&lt;/span> System.Threading.Tasks;
+&lt;span style="color:#66d9ef">namespace&lt;/span> Exception.Examples
+{
+&lt;span style="color:#66d9ef">internal&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Program&lt;/span>
+{
+&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">async&lt;/span> Task Main()
+{
+&lt;span style="color:#66d9ef">var&lt;/span> tasks = &lt;span style="color:#66d9ef">await&lt;/span> Task.WhenAll(Enumerable.Range(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">5000&lt;/span>)
+.Select(&lt;span style="color:#ae81ff">_&lt;/span> =&amp;gt; &lt;span style="color:#66d9ef">new&lt;/span> HttpClient().GetAsync(&lt;span style="color:#e6db74">&amp;#34;https://google.com&amp;#34;&lt;/span>)));
+tasks
+.Where(t =&amp;gt; &lt;span style="color:#66d9ef">true&lt;/span>)
+.ToList()
+.ForEach(r =&amp;gt; Console.WriteLine(&lt;span style="color:#e6db74">$&amp;#34;Google answered {r.StatusCode}&amp;#34;&lt;/span>));
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>Nota&lt;/strong>: &lt;em>Top-level programs&lt;/em> ainda tem algumas coisas bem peculiares para tratar inferência dinâmica de tipos e de contextos assíncronos e paralelos no C# 9, então vamos no clássico &lt;em>entrypoint program&lt;/em> mesmo.&lt;/p>
+&lt;/blockquote>
+&lt;p>Um código bem simples, e que - se liga no &lt;em>plot twist&lt;/em> - funciona perfeitamente bem! O motivo de tudo funcionar como deveria, é que temos implementado somente uma única responsabilidade dentro da função paralela e assíncrona, onde é iniciado 5000 &lt;code>Task&amp;lt;HttpResponseMessage&amp;gt;&lt;/code> que será aguardada logo no seu &lt;em>enclosure&lt;/em> que é justamente a própria &lt;code>Task.WhenAll&lt;/code>, por ser uma expressão LINQ, o código pode ser um pouco difícil de ler, mas nada que alguns minutos de leitura não resolva.&lt;/p>
+&lt;p>O problema que estamos tentando criar, acontece quando além dessa única coisa que é feita (&lt;code>return new HttpClient().GetAsync(&amp;quot;https://google.com&amp;quot;))&lt;/code>, na expressão anônima da extensão &lt;code>Select()&lt;/code> lá do LINQ), adicionamos alguma função que freia a execução dessa &lt;em>thread&lt;/em>, por exemplo, escrever na tela informações da requisição conforme são executadas, vamos alterar um pouco o código e adicionar algumas funções que fação operações de IO:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="color:#75715e">// ...
+&lt;/span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">await&lt;/span> Task.WhenAll(Enumerable.Range(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">5000&lt;/span>)
+.Select(&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#ae81ff">_&lt;/span> =&amp;gt;
+{
+&lt;span style="color:#66d9ef">try&lt;/span>
+{
+&lt;span style="color:#66d9ef">var&lt;/span> response = &lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> HttpClient().GetAsync(&lt;span style="color:#e6db74">&amp;#34;https://google.com&amp;#34;&lt;/span>);
+Console.Write(&lt;span style="color:#e6db74">$&amp;#34;Remote {response.RequestMessage?.RequestUri} answered {response.StatusCode}, &amp;#34;&lt;/span>);
+&lt;span style="color:#66d9ef">var&lt;/span> content = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadAsByteArrayAsync();
+Console.WriteLine(&lt;span style="color:#e6db74">$&amp;#34;with a length of {content.Length} byte(s)&amp;#34;&lt;/span>);
+&lt;span style="color:#66d9ef">return&lt;/span> response;
+}
+&lt;span style="color:#66d9ef">catch&lt;/span> (System.Exception e)
+{
+Console.WriteLine(e.InnerException != &lt;span style="color:#66d9ef">null&lt;/span>
+? &lt;span style="color:#e6db74">$&amp;#34;Error: {e.InnerException.Message}&amp;#34;&lt;/span>
+: &lt;span style="color:#e6db74">$&amp;#34;Error: {e.Message}&amp;#34;&lt;/span>);
+}
+}));
+&lt;span style="color:#75715e">// ...
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Nesse cenário como temos a interação com operações que causam problemas na hora de serem executadas, e nem por realizarem operações de IO com &lt;code>response.Content.ReadAsByteArrayAsync()&lt;/code> mas sim pela escrita na tela usando &lt;code>System.Console&lt;/code>, que causa um &lt;em>lock&lt;/em> e vira uma bagunça, quem estiver disponível, executa essa função.&lt;/p>
+&lt;p>Quando você executar esse código (além de receber um belíssimo banimento da Google por realizar milhares de requisições em tão pouco tempo), vai se deparar com algumas exceções de &lt;code>Task&lt;/code> ao invés das instâncias de classes referentes a pilha de rede do .NET, no caso a famosa mensagem &amp;ldquo;&lt;em>The operation was canceled&lt;/em>&amp;rdquo;.&lt;/p>
+&lt;p>E justamente quando receber essa resposta, é que os problemas do paralelismo começam a perturbar sua sanidade.&lt;/p>
+&lt;h1 id="resolvendo-com-uma-boa-sinalização">Resolvendo com uma boa sinalização&lt;/h1>
+&lt;p>Existem diversas APIs que são fornecidas dentro do CLR para sanar os problemas de paralelismo que correspondem a estes erros, podemos realizar a implementação mais simples que conheço, que tem pouquíssimas alterações no código fonte original da aplicação, utilizando &lt;code>SemaphoreSlim&lt;/code> para corrigir esse fiasco.&lt;/p>
+&lt;p>Podemos resumir esse elemento de &lt;code>System.Threads&lt;/code> como sendo uma entidade responsável por limitar o número de &lt;em>threads&lt;/em> que podem acessar uma &lt;em>pool&lt;/em> de recursos, que é justamente o que causa &amp;ldquo;&lt;em>The operation was canceled&lt;/em>&amp;rdquo; dentro de uma &lt;code>Task&lt;/code>. Sua implementação é bem simples, e ele receber por padrão um único argumento correspondente a quantidade máxima de &lt;em>threads&lt;/em> que podem ser alocadas para acessar estes recursos:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-c#" data-lang="c#">&lt;span style="color:#66d9ef">var&lt;/span> semaphore = &lt;span style="color:#66d9ef">new&lt;/span> SemaphoreSlim(Environment.ProcessorCount);
+&lt;span style="color:#66d9ef">await&lt;/span> Task.WhenAll(Enumerable.Range(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">1000&lt;/span>)
+.Select(&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#ae81ff">_&lt;/span> =&amp;gt;
+{
+&lt;span style="color:#66d9ef">await&lt;/span> semaphore.WaitAsync();
+&lt;span style="color:#66d9ef">try&lt;/span>
+{
+&lt;span style="color:#66d9ef">var&lt;/span> response = &lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> HttpClient().GetAsync(&lt;span style="color:#e6db74">&amp;#34;https://zup.com.br&amp;#34;&lt;/span>);
+Console.Write(&lt;span style="color:#e6db74">$&amp;#34;Remote {response.RequestMessage?.RequestUri} answered {response.StatusCode}, &amp;#34;&lt;/span>);
+&lt;span style="color:#66d9ef">var&lt;/span> content = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadAsByteArrayAsync();
+Console.WriteLine(&lt;span style="color:#e6db74">$&amp;#34;with a length of {content.Length} byte(s)&amp;#34;&lt;/span>);
+&lt;span style="color:#66d9ef">return&lt;/span> response;
+}
+&lt;span style="color:#66d9ef">catch&lt;/span> (System.Exception e)
+{
+Console.WriteLine(e.InnerException != &lt;span style="color:#66d9ef">null&lt;/span>
+? &lt;span style="color:#e6db74">$&amp;#34;Error: {e.InnerException.Message}&amp;#34;&lt;/span>
+: &lt;span style="color:#e6db74">$&amp;#34;Error: {e.Message}&amp;#34;&lt;/span>);
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">null&lt;/span>;
+}
+&lt;span style="color:#66d9ef">finally&lt;/span>
+{
+semaphore.Release();
+}
+}));
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Agora além de podermos controlar o número de &lt;em>threads&lt;/em> que serão utilizados para realizar as requisições, também não vamos ter problemas de concorrência ao tentar processar essa &lt;em>pool&lt;/em> de tarefas alocadas no fluxo de execução da aplicação.&lt;/p></content></item></channel></rss>
