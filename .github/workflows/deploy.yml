@@ -25,5 +25,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: limbo/public
+          FOLDER: public
           CLEAN: true 
