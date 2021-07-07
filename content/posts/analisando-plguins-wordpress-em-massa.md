@@ -3,6 +3,7 @@ title: "Analisando plguins wordpress em massa"
 date: 2021-07-06T23:38:32-03:00
 draft: true
 tags: ["scraping", "research"]
+author = "jojo"
 _build:
     list: never
 ---

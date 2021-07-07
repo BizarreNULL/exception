@@ -2,6 +2,7 @@
 title: "Hackeando apps financeiros para OSINT (e pela zueira): Tudo pelo PIX!"
 date: 2021-01-10T16:47:21-03:00
 draft: false
+author = "jojo"
 tags: ["android-re", "research"]
 ---
 

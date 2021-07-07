@@ -1,7 +1,7 @@
 +++
 title = "Interagir em enquetes abertas no LinkedIn é uma péssima ideia!"
 date = "2021-03-14T15:31:10-03:00"
-author = "Jojo"
+author = "jojo"
 authorTwitter = "6a6f6a6f"
 cover = ""
 tags = ["scraping", "csharp"]
